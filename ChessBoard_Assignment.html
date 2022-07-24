@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    body {
+      overflow-y: scroll;
+    }
+ 
+ 
+    table#ChessBoard {
+      width: 270px;
+      height: 270px;
+      
+    }
+    
+    tr.rank {
+      width: 420px;
+      height: 45px;
+    }
+    
+    td.cell {
+      width: 30px;
+      height: 30px;
+	  
+      border-left: 1px solid black;
+      border-right: 1px solid black;
+      border-top: 1px solid black;
+      border-bottom: 1px solid black;
+    }
+    
+    .white {
+      background: white;
+      color: red;
+    }
+    
+    .black {
+      background: black;
+      color: blue;
+    }
+   
+    .wK:after {
+      content: '\2654';
+    }
+    
+    .wQ:after {
+      content: '\2655';
+    }
+    
+    .wR:after {
+      content: '\2656';
+    }
+    
+    .wB:after {
+      content: '\2657';
+    }
+    
+    .wN:after {
+      content: '\2658';
+    }
+    
+    .wP:after {
+      content: '\2659';
+    }
+    
+    .bK:after {
+      content: '\265a';
+    }
+    
+    .bQ:after {
+      content: '\265b';
+    }
+    
+    .bR:after {
+      content: '\265c';
+    }
+    
+    .bB:after {
+      content: '\265d';
+    }
+    
+    .bN:after {
+      content: '\265e';
+    }
+    
+    .bP:after {
+      content: '\265f';
+    }
+  </style>
+</head>
+
+<body>
+  <table id="chessBoard"></table>
+
+  <script>
+    /* BOARD */
+    var brd = document.getElementById("chessBoard");
+    
+    var black = ['bR', 'bN', 'bB', 'bQ', 'bK', 'bB', 'bN', 'bR'];
+    var bPawn = ['bP', 'bP', 'bP', 'bP', 'bP', 'bP', 'bP', 'bP'];
+
+    var white = ['wR', 'wN', 'wB', 'wQ', 'wK', 'wB', 'wN', 'wR'];
+    var wPawn = ['wP', 'wP', 'wP', 'wP', 'wP', 'wP', 'wP', 'wP'];
+
+    
+    for (var i = 0; i < 8; i++) {
+
+      var rank = brd.insertRow(i);
+      rank.classList.add('rank');
+      rank.id = 8 - i;
+
+      for (var j = 0; j < 8; j++) {
+       
+        var cell = rank.insertCell(j);
+        var color = parseInt((i + j) % 2, 10) === 0 ? 'white' : 'black';
+       
+        var col = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+        var coord = document.createElement('sup');
+        
+        cell.appendChild(coord);
+        cell.classList.add('cell');
+        cell.classList.add(color);
+        pieces(i);
+      }
+    }
+    
+    function pieces(i) {
+      var row = brd.rows[i].querySelectorAll('td');
+      var piece = document.createElement('div');
+      piece.setAttribute('draggable', true);
+      switch (i) {
+        case 0:
+          piece.classList.add('piece');
+          piece.classList.add('black');
+          piece.classList.add(black[j]);
+          cell.appendChild(piece);
+          break;
+        case 1:
+          piece.classList.add('piece');
+          piece.classList.add('black');
+          piece.classList.add('wP');
+          cell.appendChild(piece);
+          break;
+        case 6:
+          piece.classList.add('piece');
+          piece.classList.add('white');
+          piece.classList.add('bP');
+          cell.appendChild(piece);
+          break;
+        case 7:
+          piece.classList.add('piece');
+          piece.classList.add('white');
+          piece.classList.add(white[j]);
+          cell.appendChild(piece);
+          break;
+        default:
+          break;
+      }
+    }
+
+  </script>
+</body>
+
+</html>
